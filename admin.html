@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin workspace | Edunova</title>
+    <style>
+        :root {
+            --ink: #18242a;
+            --muted: #718087;
+            --line: #dbe5e3;
+            --paper: #f3f7f4;
+            --panel: #fff;
+            --teal: #1f7773;
+            --coral: #e36b4d;
+            --gold: #d7a347;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            color: var(--ink);
+            background: var(--paper);
+            font: 15px/1.5 "Trebuchet MS", sans-serif;
+        }
+
+        .app-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            min-height: 76px;
+            padding: 0 clamp(20px, 5vw, 72px);
+            background: #fff;
+            border-bottom: 1px solid var(--line);
+        }
+
+        .mark {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 700;
+            letter-spacing: .05em;
+        }
+
+        .mark-dot {
+            width: 27px;
+            height: 27px;
+            display: inline-block;
+            border: 3px solid var(--coral);
+            border-radius: 50%;
+            position: relative;
+        }
+
+        .mark-dot::after {
+            content: "";
+            position: absolute;
+            width: 7px;
+            height: 7px;
+            top: 7px;
+            left: 7px;
+            background: var(--coral);
+            border-radius: 50%;
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .admin-name {
+            color: var(--muted);
+            font-size: .9rem;
+        }
+
+        button {
+            border: 0;
+            border-radius: 7px;
+            cursor: pointer;
+            font: inherit;
+        }
+
+        .logout {
+            padding: 9px 14px;
+            color: var(--teal);
+            background: #e5f1ee;
+            font-weight: 700;
+        }
+
+        .logout:hover {
+            background: #d3e8e2;
+        }
+
+        .page {
+            width: min(1160px, calc(100% - 40px));
+            margin: 0 auto;
+            padding: 54px 0 70px;
+        }
+
+        .page-heading {
+            display: flex;
+            justify-content: space-between;
+            align-items: end;
+            gap: 24px;
+            margin-bottom: 32px;
+        }
+
+        .eyebrow {
+            margin: 0 0 8px;
+            color: var(--coral);
+            font-size: .75rem;
+            font-weight: 700;
+            letter-spacing: .14em;
+            text-transform: uppercase;
+        }
+
+        h1,
+        h2 {
+            margin: 0;
+            font-family: Georgia, serif;
+            letter-spacing: -.03em;
+        }
+
+        h1 {
+            font-size: clamp(2.2rem, 5vw, 4rem);
+            line-height: 1;
+        }
+
+        .date {
+            color: var(--muted);
+            font-size: .9rem;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+            margin-bottom: 32px;
+        }
+
+        .stat,
+        .panel {
+            background: var(--panel);
+            border: 1px solid var(--line);
+            border-radius: 12px;
+        }
+
+        .stat {
+            padding: 24px;
+        }
+
+        .stat-label {
+            margin: 0 0 14px;
+            color: var(--muted);
+            font-size: .8rem;
+            text-transform: uppercase;
+            letter-spacing: .08em;
+        }
+
+        .stat-value {
+            margin: 0;
+            font: 700 2.5rem/1 Georgia, serif;
+        }
+
+        .stat-note {
+            margin: 12px 0 0;
+            color: var(--teal);
+            font-size: .82rem;
+        }
+
+        .content-grid {
+            display: grid;
+            grid-template-columns: minmax(0, 1.5fr) minmax(260px, .8fr);
+            gap: 20px;
+        }
+
+        .panel {
+            padding: 25px;
+        }
+
+        .panel-heading {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            margin-bottom: 20px;
+        }
+
+        h2 {
+            font-size: 1.45rem;
+        }
+
+        .search {
+            width: 190px;
+            padding: 10px 12px;
+            border: 1px solid var(--line);
+            border-radius: 7px;
+            font: inherit;
+        }
+
+        .search:focus {
+            outline: 3px solid rgba(227, 107, 77, .16);
+            border-color: var(--coral);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th,
+        td {
+            padding: 14px 8px;
+            border-bottom: 1px solid #edf1ef;
+            text-align: left;
+        }
+
+        th {
+            color: var(--muted);
+            font-size: .72rem;
+            letter-spacing: .08em;
+            text-transform: uppercase;
+        }
+
+        td {
+            font-size: .92rem;
+        }
+
+        td:first-child {
+            font-weight: 700;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 4px 8px;
+            border-radius: 99px;
+            color: #39796b;
+            background: #e5f3ed;
+            font-size: .75rem;
+        }
+
+        .empty {
+            color: var(--muted);
+        }
+
+        .activity {
+            display: grid;
+            gap: 18px;
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        .activity li {
+            display: grid;
+            grid-template-columns: 10px 1fr;
+            gap: 12px;
+            align-items: start;
+        }
+
+        .activity-dot {
+            width: 10px;
+            height: 10px;
+            margin-top: 6px;
+            border-radius: 50%;
+            background: var(--gold);
+        }
+
+        .activity strong {
+            display: block;
+            font-size: .92rem;
+        }
+
+        .activity span {
+            display: block;
+            margin-top: 3px;
+            color: var(--muted);
+            font-size: .82rem;
+        }
+
+        .notice {
+            margin-top: 20px;
+            padding: 16px;
+            border-left: 3px solid var(--coral);
+            color: #65534d;
+            background: #fff7f3;
+            font-size: .88rem;
+        }
+
+        @media (max-width: 760px) {
+            .app-header {
+                align-items: flex-start;
+                padding-top: 20px;
+                padding-bottom: 20px;
+            }
+
+            .header-actions {
+                align-items: flex-end;
+                flex-direction: column;
+                gap: 8px;
+            }
+
+            .page-heading {
+                display: block;
+            }
+
+            .date {
+                margin-top: 14px;
+            }
+
+            .stats,
+            .content-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .panel-heading {
+                align-items: flex-start;
+                flex-direction: column;
+            }
+
+            .search {
+                width: 100%;
+            }
+        }
+
+        @media (max-width: 500px) {
+            .page {
+                width: min(100% - 28px, 1160px);
+                padding-top: 36px;
+            }
+
+            .app-header {
+                padding-left: 14px;
+                padding-right: 14px;
+            }
+
+            .admin-name {
+                display: none;
+            }
+
+            th:nth-child(2),
+            td:nth-child(2) {
+                display: none;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header class="app-header">
+        <div class="mark"><span class="mark-dot" aria-hidden="true"></span> EDUNOVA / ADMIN</div>
+        <div class="header-actions">
+            <span class="admin-name" id="admin-name">Administrator</span>
+            <button class="logout" id="admin-logout" type="button">Sign out</button>
+        </div>
+    </header>
+    <main class="page">
+        <div class="page-heading">
+            <div>   
+                <p class="eyebrow">Operations overview</p>
+                <h1>Good morning, admin.</h1>
+            </div>
+            <time class="date" id="today"></time>
+        </div>
+        <section class="stats" aria-label="Platform statistics">
+            <article class="stat">
+                <p class="stat-label">Registered learners</p>
+                <p class="stat-value" id="user-count">--</p>
+                <p class="stat-note">Active learning community</p>
+            </article>
+            <article class="stat">
+                <p class="stat-label">Learning areas</p>
+                <p class="stat-value">20</p>
+                <p class="stat-note">Quantum curriculum topics</p>
+            </article>
+            <article class="stat">
+                <p class="stat-label">Platform status</p>
+                <p class="stat-value">Live</p>
+                <p class="stat-note">All systems available</p>
+            </article>
+        </section>
+        <div class="content-grid">
+            <section class="panel" aria-labelledby="learners-title">
+                <div class="panel-heading">
+                    <h2 id="learners-title">Learners</h2><input class="search" id="learner-search" type="search"
+                        placeholder="Search learners" aria-label="Search learners">
+                </div>
+                <div style="overflow-x:auto">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody id="learner-list">
+                            <tr>
+                                <td colspan="3" class="empty">Loading learner data...</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+            <aside class="panel" aria-labelledby="activity-title">
+                <div class="panel-heading">
+                    <h2 id="activity-title">Recent activity</h2>
+                </div>
+                <ul class="activity">
+                    <li><span class="activity-dot"></span>
+                        <div><strong>Admin workspace opened</strong><span>Just now</span></div>
+                    </li>
+                    <li><span class="activity-dot"></span>
+                        <div><strong>Curriculum is available</strong><span>10 learning areas online</span></div>
+                    </li>
+                    <li><span class="activity-dot"></span>
+                        <div><strong>User directory synced</strong><span>From local account records</span></div>
+                    </li>
+                </ul>
+                <p class="notice">This dashboard is isolated from the learner interface. Signing in here does not log a
+                    learner in or change their experience.</p>
+            </aside>
+        </div>
+    </main>
+    <script>
+        const adminSession = JSON.parse(sessionStorage.getItem('edunovaAdminSession') || 'null');
+        if (!adminSession) window.location.replace('admin-login.html');
+
+        if (adminSession) {
+            document.querySelector('#admin-name').textContent = adminSession.name;
+            document.querySelector('#today').textContent = new Intl.DateTimeFormat('en', { dateStyle: 'full' }).format(new Date());
+
+            document.querySelector('#admin-logout').addEventListener('click', () => {
+                sessionStorage.removeItem('edunovaAdminSession');
+                window.location.replace('admin-login.html');
+            });
+
+            const learnerList = document.querySelector('#learner-list');
+            let learners = [];
+            const renderLearners = (query = '') => {
+                const normalizedQuery = query.trim().toLowerCase();
+                const visibleLearners = learners.filter((learner) => (learner.name + ' ' + learner.email).toLowerCase().includes(normalizedQuery));
+                learnerList.replaceChildren(...(visibleLearners.length ? visibleLearners.map((learner) => {
+                    const row = document.createElement('tr');
+                    row.innerHTML = '<td>' + learner.name + '</td><td>' + learner.email + '</td><td><span class="badge">Active</span></td>';
+                    return row;
+                }) : [Object.assign(document.createElement('tr'), { innerHTML: '<td colspan="3" class="empty">No learners match your search.</td>' })]));
+            };
+
+            fetch('users.json', { cache: 'no-store' }).then((response) => response.json()).then((data) => {
+                learners = Array.isArray(data.users) ? data.users : [];
+                document.querySelector('#user-count').textContent = learners.length;
+                renderLearners();
+            }).catch(() => {
+                document.querySelector('#user-count').textContent = '0';
+                learnerList.innerHTML = '<tr><td colspan="3" class="empty">Learner data is unavailable.</td></tr>';
+            });
+            document.querySelector('#learner-search').addEventListener('input', (event) => renderLearners(event.target.value));
+        }
+    </script>
+</body>
+
+</html>

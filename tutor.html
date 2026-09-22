@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Tutor | Edunova</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <header class="site-header">
+        <nav class="navbar" aria-label="Primary navigation"><a class="brand" href="index.html"
+                aria-label="Qubitly home"><span class="brand-mark"
+                    aria-hidden="true"><span></span><span></span><span></span></span><span>Qubitly</span></a><button
+                class="menu-toggle" type="button" aria-expanded="false" aria-controls="main-menu"
+                aria-label="Open navigation menu"><span></span><span></span><span></span></button>
+            <div class="nav-menu" id="main-menu"><a class="nav-link" href="index.html">Home</a><a class="nav-link"
+                    href="learn.html">Algorithms</a><a class="nav-link" href="quiz.html">Quiz</a><a
+                    class="nav-link active" href="tutor.html" aria-current="page">AI Tutor</a><a class="profile-link"
+                    href="profile.html"><span class="profile-avatar" aria-hidden="true">A</span><span>Profile</span></a>
+            </div>
+        </nav>
+    </header>
+    <main class="page-width tab-page tutor-page">
+        <p class="eyebrow">Your quantum copilot</p>
+        <h1>Ask better <em>questions.</em></h1>
+        <p class="hero-copy">Ask about any topic from the Learn page and get a simple explanation immediately.</p>
+        <div class="tutor-page-box">
+            <div class="tutor-response" id="tutor-response" aria-live="polite"><span class="response-label">Tutor
+                    explanation</span>
+                <p>Ask a question to see an easy explanation here.</p>
+            </div>
+            <form class="tutor-form" id="tutor-form"><label class="sr-only" for="tutor-question">Ask your AI
+                    Tutor</label><input id="tutor-question" type="text"
+                    placeholder="Example: Explain Grover, HHL, or QSVT"><button class="tutor-mic" id="tutor-mic"
+                    type="button" aria-label="Ask AI Tutor with your voice"
+                    title="Ask with voice">&#127908;</button><button type="submit"
+                    aria-label="Send question">&#8599;</button></form>
+            <div class="prompt-status" id="prompt-status" aria-live="polite"></div>
+        </div>
+    </main>
+    <script src="script.js"></script>
+</body>
+
+</html>
