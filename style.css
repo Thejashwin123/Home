@@ -1898,7 +1898,7 @@ h3 {
 :root[data-theme="dark"] .tutor-panel h2,
 :root[data-theme="dark"] .progress-panel h2,
 :root[data-theme="dark"] h2,
- :root[data-theme="dark"] h3 {
+:root[data-theme="dark"] h3 {
     color: #edf5f3;
 }
 
@@ -4562,7 +4562,7 @@ h2 {
         padding: 20px 17px;
     }
 
-    .tutor-panel > p {
+    .tutor-panel>p {
         margin-top: 16px;
     }
 
@@ -4687,6 +4687,127 @@ main,
     opacity: 1;
 }
 
+@media (max-width: 800px) {
+    .page-width {
+        width: min(100% - 28px, 680px);
+    }
+
+    .hero {
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 34px;
+        min-height: auto;
+        padding-top: 54px;
+        padding-bottom: 54px;
+    }
+
+    .hero-content {
+        width: 100%;
+    }
+
+    .hero h1 {
+        max-width: 650px;
+        font-size: clamp(42px, 10vw, 68px);
+    }
+
+    .hero-copy {
+        max-width: 600px;
+        font-size: 16px;
+    }
+
+    .hero-actions,
+    .hero-actions .button {
+        width: 100%;
+    }
+
+    .hero-actions {
+        flex-direction: column;
+        margin-top: 26px;
+    }
+
+    .qubit-stage {
+        width: 100%;
+        min-height: 310px;
+    }
+
+    .quick-grid {
+        display: block;
+        margin-bottom: 60px;
+    }
+
+    .tutor-panel {
+        width: 100%;
+    }
+
+    .nav-menu {
+        max-height: calc(100vh - 92px);
+        overflow-y: auto;
+    }
+}
+
+@media (max-width: 420px) {
+    .page-width {
+        width: calc(100% - 22px);
+    }
+
+    .site-header {
+        padding-right: 7px;
+        padding-left: 7px;
+    }
+
+    .navbar {
+        padding-right: 7px;
+        padding-left: 11px;
+    }
+
+    .hero {
+        padding-top: 42px;
+        padding-bottom: 42px;
+    }
+
+    .hero h1 {
+        font-size: clamp(36px, 12vw, 50px);
+    }
+
+    .hero-copy {
+        font-size: 14px;
+        line-height: 1.55;
+    }
+
+    .qubit-stage {
+        min-height: 260px;
+    }
+
+    .qubit-stage::before {
+        width: 250px;
+        height: 250px;
+    }
+
+    .qubit-stage::after {
+        width: 330px;
+        height: 330px;
+    }
+
+    .bloch-sphere {
+        width: 140px;
+        height: 140px;
+    }
+
+    .orbit {
+        width: 138px;
+        height: 55px;
+    }
+
+    .tutor-panel {
+        padding: 18px 14px;
+    }
+
+    .panel-heading h2 {
+        font-size: 22px;
+    }
+}
+
 :root[data-theme="dark"] .login-card {
     --ink: #1d2b33;
     --muted: #65747c;
@@ -4704,7 +4825,7 @@ main,
 }
 
 .login-card-heading h2,
-.login-card #login-form > label,
+.login-card #login-form>label,
 .login-card .password-label,
 .login-card .remember-option {
     color: #1d2b33;
